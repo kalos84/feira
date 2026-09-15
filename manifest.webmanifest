@@ -1,0 +1,13 @@
+{
+  "name": "FEIRA",
+  "short_name": "FEIRA",
+  "description": "Sua lista, o caminho mais curto pelo mercado.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2F4F7",
+  "theme_color": "#0B4FA8",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
