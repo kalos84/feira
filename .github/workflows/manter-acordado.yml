@@ -1,0 +1,22 @@
+# O plano gratuito do Supabase pausa o projeto parado há cerca de 7 dias.
+# Esta tarefa faz uma leitura pequena a cada 3 dias para ele não dormir.
+# Com o RLS do FEIRA, o visitante recebe lista vazia, mas a consulta chega ao
+# banco, e é isso que conta como atividade.
+# Atenção: o GitHub desliga tarefas agendadas de repositório sem commits há 60 dias.
+name: manter o banco acordado
+on:
+  schedule:
+    - cron: '43 9 */3 * *'
+  workflow_dispatch:
+jobs:
+  acordar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ler uma lista
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}
+          CHAVE: ${{ secrets.SUPABASE_CHAVE_PUBLICA }}
+        run: |
+          codigo=$(curl -s -o /dev/null -w '%{http_code}' "$URL/rest/v1/listas?select=id&limit=1" -H "apikey: $CHAVE")
+          echo "resposta: $codigo"
+          test "$codigo" = "200"
